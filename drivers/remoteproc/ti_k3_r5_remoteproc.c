@@ -2087,7 +2087,13 @@ static const struct k3_r5_soc_data am64_soc_data = {
 static const struct k3_r5_soc_data am62_soc_data = {
 	.tcm_is_double = false,
 	.tcm_ecc_autoinit = true,
-	.single_cpu_mode = false,
+	/*
+	 * Powering the core down leaves its LPSC stuck: put_device() is NACKed
+	 * and every later device-state request on the same device is refused,
+	 * so the core cannot be restarted without a power cycle. Keep it
+	 * powered and stop it with the local reset asserted instead.
+	 */
+	.single_cpu_mode = true,
 	.is_single_core = true,
 };
 
