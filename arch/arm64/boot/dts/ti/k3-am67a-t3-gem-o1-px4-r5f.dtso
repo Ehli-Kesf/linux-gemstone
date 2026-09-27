@@ -66,4 +66,12 @@
 		target = <&mcu_gpio0>;
 		__overlay__ { status = "disabled"; };
 	};
+	/*
+	 * eMMC (MMCSD0) holds the R5F parameters, mission data and logs.
+	 * Linux boots from the SD card (mmc1 alias, so it stays mmcblk1).
+	 */
+	fragment@11 {
+		target = <&sdhci0>;
+		__overlay__ { status = "disabled"; };
+	};
 };
