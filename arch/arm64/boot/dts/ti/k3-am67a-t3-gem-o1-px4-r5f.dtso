@@ -74,4 +74,22 @@
 		target = <&sdhci0>;
 		__overlay__ { status = "disabled"; };
 	};
+	/*
+	 * DMTimer0-2: NuttX system tick (DMTimer2) and PX4 HRT (DMTimer1).
+	 * DMTimer0 is U-Boot's tick. Linux binds omap_timer to all of them,
+	 * which reprograms a timer the R5F is running when the R5F starts
+	 * before Linux (early boot from U-Boot).
+	 */
+	fragment@12 {
+		target = <&main_timer0>;
+		__overlay__ { status = "reserved"; };
+	};
+	fragment@13 {
+		target = <&main_timer1>;
+		__overlay__ { status = "reserved"; };
+	};
+	fragment@14 {
+		target = <&main_timer2>;
+		__overlay__ { status = "reserved"; };
+	};
 };
